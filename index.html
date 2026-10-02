@@ -181,7 +181,7 @@
       linear-gradient(160deg, #d41f31 0%, var(--box-red) 55%, var(--box-red-dark) 100%);
     border-radius: 12px;
     box-shadow: 0 16px 30px rgba(0,0,0,.5);
-    padding: 22px 18px;
+    padding: 12px 18px;
     overflow: hidden;
   }
 
@@ -193,7 +193,7 @@
     position: relative;
     z-index: 1;
   }
-  .lid .std .l1 { font-size: 44px; font-weight: 700; }
+  .lid .std .l1 { font-size: 44px; font-weight: 700; display: inline-block; }
   .lid .std .l2 { font-size: 22px; margin-left: 46px; }
   .lid .std .l3 { font-size: 40px; font-weight: 700; margin-left: 24px; }
   .lid .date {
@@ -201,11 +201,20 @@
     font-weight: 700;
     font-size: 30px;
     color: #fff;
-    margin-top: 2px;
+    margin-top: 6px;
     text-align: center;
     position: relative;
     z-index: 1;
   }
+  /* Save the Date loads in one line at a time */
+  .lid .std .l1, .lid .std .l2, .lid .std .l3, .lid .date {
+    opacity: 0;
+    animation: fadeUp .7s ease forwards;
+  }
+  .lid .std .l1 { animation-delay: .2s; }
+  .lid .std .l2 { animation-delay: .6s; }
+  .lid .std .l3 { animation-delay: 1s; }
+  .lid .date    { animation-delay: 1.4s; }
   .lid .heart { color: #ffd3d8; position: absolute; z-index: 1; }
   .lid .h1 { top: 24px; right: 26px; font-size: 20px; }
   .lid .h2 { top: 78px; left: 20px; font-size: 16px; }
@@ -264,7 +273,7 @@
   /* "We Are Getting Married" + names, shown at the start, under the box */
   .reveal {
     position: absolute;
-    top: 226px;
+    top: 242px;
     left: 0;
     width: 100%;
     text-align: center;
