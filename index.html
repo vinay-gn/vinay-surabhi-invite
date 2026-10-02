@@ -72,41 +72,40 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 40px 24px;
+    padding: 40px 14px;
     background:
       radial-gradient(120% 80% at 50% 0%, #2a0407 0%, #160205 100%);
     transition: opacity .8s ease;
   }
   #scene-box.hide { opacity: 0; }
 
-  .box-stage {
+  .stage {
     position: relative;
-    width: 250px;
-    height: 330px;
-    margin-bottom: 200px;
-    perspective: 900px;
+    width: 280px;
+    height: 460px;
+    margin: 0 auto;
   }
 
-  /* drawer tray + contents that slide out from under the lid */
-  .drawer {
+  /* inner tray that slides down out of the sleeve */
+  .tray {
     position: absolute;
-    left: 6px;
-    right: 6px;
-    top: 150px;
-    height: 180px;
+    top: 8px;
+    left: 22px;
+    width: 236px;
+    height: 188px;
     background: linear-gradient(180deg, var(--box-red) 0%, var(--box-red-dark) 100%);
     border-radius: 6px;
-    box-shadow: inset 0 6px 14px rgba(0,0,0,.35), 0 10px 20px rgba(0,0,0,.4);
-    transform: translateY(0);
-    transition: transform 1.6s cubic-bezier(.2,.8,.2,1);
+    box-shadow: inset 0 8px 18px rgba(0,0,0,.45);
+    z-index: 2;
     display: flex;
-    gap: 10px;
+    gap: 12px;
     align-items: center;
     justify-content: center;
     padding: 14px;
     overflow: hidden;
+    transition: transform 1.4s cubic-bezier(.2,.8,.2,1);
   }
-  .open .drawer { transform: translateY(150px); }
+  .stage.open .tray { transform: translateY(196px); }
 
   .invite-card {
     width: 92px;
@@ -168,12 +167,14 @@
     margin-top: 2px;
   }
 
-  /* lid sits above the drawer and tilts up when opening */
+  /* sleeve = printed Save-the-Date cover, sits above the tray */
   .lid {
-    position: relative;
-    width: 250px;
-    height: 210px;
-    margin: 0 auto;
+    position: absolute;
+    top: 0;
+    left: 10px;
+    width: 260px;
+    height: 200px;
+    z-index: 3;
     background:
       linear-gradient(160deg, #d41f31 0%, var(--box-red) 55%, var(--box-red-dark) 100%);
     border-radius: 12px;
@@ -231,66 +232,91 @@
     transition: transform .2s ease, box-shadow .2s ease;
   }
   .enter-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(0,0,0,.55); }
-  .chevron {
-    margin-top: 20px;
+
+  /* pull tab that opens the box */
+  .pull {
+    position: absolute;
+    top: 196px;
+    left: 50%;
     width: 46px;
-    height: 46px;
+    height: 30px;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
+    padding-bottom: 4px;
     color: #fff;
     background: linear-gradient(180deg, #d41f31 0%, var(--box-red-dark) 100%);
     border: none;
-    border-radius: 12px;
+    border-radius: 0 0 9px 9px;
     cursor: pointer;
-    box-shadow: 0 8px 18px rgba(0,0,0,.45);
+    box-shadow: 0 8px 14px rgba(0,0,0,.4);
+    z-index: 4;
+    transform: translateX(-50%);
     animation: bob 1.4s ease-in-out infinite;
   }
-  .chevron svg { display: block; }
-  .chevron.gone {
+  .pull svg { display: block; }
+  .stage.open .pull {
     opacity: 0;
-    transform: scale(.5);
     pointer-events: none;
-    transition: opacity .5s ease, transform .5s ease;
+    transition: opacity .5s ease;
     animation: none;
   }
-  @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(7px); } }
+  @keyframes bob {
+    0%,100% { transform: translateX(-50%) translateY(0); }
+    50%     { transform: translateX(-50%) translateY(5px); }
+  }
 
+  /* "We Are Getting Married" + names, shown at the start, under the box */
   .reveal {
+    position: absolute;
+    top: 226px;
+    left: 0;
     width: 100%;
     text-align: center;
-    overflow: hidden;
-    max-height: 0;
-    opacity: 0;
-    margin-top: 0;
-    transition: max-height 1s ease, opacity .7s ease, margin-top .7s ease;
+    z-index: 1;
+    transition: opacity .6s ease;
   }
-  .reveal.show { max-height: 360px; opacity: 1; margin-top: 24px; }
+  .stage.open .reveal { opacity: 0; }
 
   .getting {
     font-family: 'Cormorant Garamond', serif;
     font-variant: small-caps;
     letter-spacing: .14em;
-    font-size: clamp(16px, 5.4vw, 24px);
+    font-size: clamp(15px, 5vw, 21px);
     color: #f3e7c8;
     white-space: nowrap;
     display: inline-block;
     clip-path: inset(0 100% 0 0);
   }
-  .reveal.show .getting { animation: wipe 1.1s ease .2s forwards; }
+  .reveal.anim .getting { animation: wipe 1.1s ease .2s forwards; }
   @keyframes wipe { to { clip-path: inset(0 0 0 0); } }
 
   .names-script {
     font-family: 'Pinyon Script', cursive;
-    font-size: clamp(34px, 11vw, 46px);
+    font-size: clamp(32px, 10.5vw, 44px);
     color: #fff;
-    margin-top: 8px;
+    margin-top: 6px;
     opacity: 0;
   }
-  .reveal.show .names-script { animation: fadeUp .9s ease 1.05s forwards; }
+  .reveal.anim .names-script { animation: fadeUp .9s ease 1.0s forwards; }
 
-  .reveal .enter-btn { margin-top: 22px; opacity: 0; }
-  .reveal.show .enter-btn { animation: fadeUp .8s ease 1.7s forwards; }
+  /* Enter button appears after the box opens */
+  .enter-wrap {
+    position: absolute;
+    top: 406px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    z-index: 4;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .7s ease;
+  }
+  .stage.open .enter-wrap {
+    opacity: 1;
+    pointer-events: auto;
+    transition-delay: .9s;
+  }
   @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 
   /* ================= SCENE 2 : INVITATION ================= */
@@ -540,26 +566,48 @@
 
     <!-- ===================== SCENE 1 ===================== -->
     <section id="scene-box">
-      <div class="lid">
-        <span class="heart h1">♥</span>
-        <span class="heart h2">♥</span>
-        <div class="mini-photo"></div>
-        <div class="std">
-          <span class="l1">Save</span>
-          <div class="l2">the</div>
-          <div class="l3">Date</div>
+      <div class="stage" id="stage">
+
+        <div class="tray">
+          <div class="invite-card">
+            <span class="lily">🌷</span>
+            <span class="n">Vinay</span>
+            <span class="amp">&amp;</span>
+            <span class="n">Surabhi</span>
+          </div>
+          <div class="photostrip">
+            <div class="shot"></div>
+            <div class="shot"></div>
+            <div class="shot"></div>
+            <div class="cap">SAVE THE DATE · 09.05.2027</div>
+          </div>
         </div>
-        <div class="date">09-05-2027</div>
-      </div>
 
-      <button class="chevron" id="revealArrow" aria-label="Open invitation">
-        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-      </button>
+        <div class="lid">
+          <span class="heart h1">♥</span>
+          <span class="heart h2">♥</span>
+          <div class="mini-photo"></div>
+          <div class="std">
+            <span class="l1">Save</span>
+            <div class="l2">the</div>
+            <div class="l3">Date</div>
+          </div>
+          <div class="date">09-05-2027</div>
+        </div>
 
-      <div class="reveal" id="reveal">
-        <div class="getting">We Are Getting Married</div>
-        <div class="names-script">Vinay &amp; Surabhi</div>
-        <button class="enter-btn" id="enterBtn">Enter Our Wedding</button>
+        <button class="pull" id="revealArrow" aria-label="Open the box">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+
+        <div class="reveal" id="reveal">
+          <div class="getting">We Are Getting Married</div>
+          <div class="names-script">Vinay &amp; Surabhi</div>
+        </div>
+
+        <div class="enter-wrap">
+          <button class="enter-btn" id="enterBtn">Enter Our Wedding</button>
+        </div>
+
       </div>
     </section>
 
@@ -623,15 +671,19 @@
 
 <script>
   /* ---- Scene 1 interactions ---- */
+  var stage    = document.getElementById('stage');
   var revealArrow = document.getElementById('revealArrow');
   var reveal   = document.getElementById('reveal');
   var enterBtn = document.getElementById('enterBtn');
   var sceneBox = document.getElementById('scene-box');
   var sceneInv = document.getElementById('scene-invite');
 
+  // intro text animation at the start
+  requestAnimationFrame(function () { reveal.classList.add('anim'); });
+
+  // tap the pull tab -> slide the box open, then reveal the Enter button
   revealArrow.addEventListener('click', function () {
-    reveal.classList.add('show');
-    revealArrow.classList.add('gone');
+    stage.classList.add('open');
   });
 
   enterBtn.addEventListener('click', function () {
