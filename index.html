@@ -459,6 +459,46 @@
     line-height: 1.7;
   }
 
+  .events {
+    margin: 32px auto 0;
+    max-width: 340px;
+  }
+  .events-title {
+    text-align: center;
+    font-variant: small-caps;
+    letter-spacing: .2em;
+    font-size: 17px;
+    color: #e7cfcf;
+    margin-bottom: 14px;
+  }
+  .event-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    padding: 11px 16px;
+    border: 1px solid rgba(240,220,220,.28);
+    border-radius: 12px;
+    background: rgba(255,255,255,.04);
+    margin-bottom: 10px;
+  }
+  .event-row.highlight {
+    background: rgba(255,255,255,.1);
+    border-color: rgba(240,220,220,.5);
+  }
+  .event-row .ev-name {
+    font-variant: small-caps;
+    letter-spacing: .1em;
+    font-size: 15px;
+    color: #fff;
+  }
+  .event-row .ev-date {
+    font-size: 13px;
+    letter-spacing: .05em;
+    color: #ecd9d9;
+    text-align: right;
+  }
+
   .join {
     margin-top: 30px;
     text-align: center;
@@ -647,8 +687,24 @@
       </div>
 
       <div class="meta">
-        on Sunday, 09 May 2027<br>
+        on Sunday, 09 May 2027 &middot; Muhurta 12:26 PM<br>
         Honnaraka Sabha Bhavana, Ankola
+      </div>
+
+      <div class="events">
+        <div class="events-title">Celebrations</div>
+        <div class="event-row">
+          <span class="ev-name">Baleshastra</span>
+          <span class="ev-date">Wed, 05 May 2027</span>
+        </div>
+        <div class="event-row">
+          <span class="ev-name">Haldi</span>
+          <span class="ev-date">Thu, 06 May 2027</span>
+        </div>
+        <div class="event-row highlight">
+          <span class="ev-name">Wedding &middot; Muhurta</span>
+          <span class="ev-date">Sun, 09 May 2027<br>12:26 PM</span>
+        </div>
       </div>
 
       <div class="join">We hope you can join us in…</div>
