@@ -176,6 +176,7 @@
     height: 200px;
     z-index: 3;
     background:
+      url('photos/box-image.png') center / cover no-repeat,
       linear-gradient(160deg, #d41f31 0%, var(--box-red) 55%, var(--box-red-dark) 100%);
     border-radius: 12px;
     box-shadow: 0 16px 30px rgba(0,0,0,.5);
@@ -207,16 +208,7 @@
   .lid .heart { color: #ffd3d8; position: absolute; z-index: 1; }
   .lid .h1 { top: 24px; right: 26px; font-size: 20px; }
   .lid .h2 { top: 78px; left: 20px; font-size: 16px; }
-  /* full-box image layer (transparent placeholder — swap src for your own design) */
-  .lid .box-img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 0;
-    pointer-events: none;
-  }
+  /* full-box background image is set on .lid (swap photos/box-image.png for your own design) */
 
   .enter-btn {
     font-family: 'Cormorant Garamond', serif;
@@ -586,7 +578,6 @@
         </div>
 
         <div class="lid">
-          <img class="box-img" src="photos/box-image.png" alt="">
           <span class="heart h1">♥</span>
           <span class="heart h2">♥</span>
           <div class="std">
