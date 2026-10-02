@@ -85,7 +85,6 @@
     height: 330px;
     margin-bottom: 200px;
     perspective: 900px;
-    cursor: pointer;
   }
 
   /* drawer tray + contents that slide out from under the lid */
@@ -530,7 +529,7 @@
       </div>
 
       <button class="enter-btn" id="enterBtn">Enter Our Wedding</button>
-      <div class="tap-hint" id="tapHint">tap the box</div>
+      <div class="tap-hint" id="tapHint"></div>
     </section>
 
     <!-- ===================== SCENE 2 ===================== -->
@@ -602,7 +601,6 @@
     stage.classList.add('open');
     tapHint.textContent = 'now enter our wedding';
   }
-  stage.addEventListener('click', openBox);
 
   // auto-open after a short beat, like the video
   setTimeout(openBox, 1200);
