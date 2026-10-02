@@ -273,7 +273,7 @@
   /* "We Are Getting Married" + names, shown at the start, under the box */
   .reveal {
     position: absolute;
-    top: 242px;
+    top: 262px;
     left: 0;
     width: 100%;
     text-align: center;
@@ -481,10 +481,16 @@
     border-radius: 12px;
     background: rgba(255,255,255,.04);
     margin-bottom: 10px;
+    cursor: pointer;
+    transition: transform .25s ease, background .25s ease, border-color .25s ease, box-shadow .25s ease;
   }
+  .event-row:hover,
+  .event-row:focus,
   .event-row.highlight {
-    background: rgba(255,255,255,.1);
-    border-color: rgba(240,220,220,.5);
+    background: rgba(255,255,255,.12);
+    border-color: rgba(240,220,220,.6);
+    transform: scale(1.04);
+    box-shadow: 0 8px 20px rgba(0,0,0,.3);
   }
   .event-row .ev-name {
     font-variant: small-caps;
@@ -693,15 +699,15 @@
 
       <div class="events">
         <div class="events-title">Celebrations</div>
-        <div class="event-row">
+        <div class="event-row" tabindex="0">
           <span class="ev-name">Haldi</span>
           <span class="ev-date">Thu, 06 May 2027</span>
         </div>
-        <div class="event-row">
+        <div class="event-row" tabindex="0">
           <span class="ev-name">Bale Shastra</span>
           <span class="ev-date">Wed, 05 May 2027</span>
         </div>
-        <div class="event-row highlight">
+        <div class="event-row highlight" tabindex="0">
           <span class="ev-name">Wedding &middot; Muhurta</span>
           <span class="ev-date">Sun, 09 May 2027<br>12:26 PM</span>
         </div>
